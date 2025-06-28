@@ -12,11 +12,13 @@ public class TurnSystem : MonoBehaviour
     public Image opponentBackground;
     public CharacterCard attackCard;
     public CharacterCard defenseCard;
-    public bool isActionPhase;
+    public static bool continueGame;
+    public GameObject gameOver;
 
     //Make Turnsystem a singleton (need to understand)
     public static TurnSystem Instance {  get; private set; }
 
+    //ensures turnsystem is a singleton
     private void Awake()
     {
         if (Instance == null)
@@ -32,24 +34,32 @@ public class TurnSystem : MonoBehaviour
     void Start()
     {
         isYourTurn = true;
-
+        continueGame = true;
     }
 
     void Update()
     {
-        if (isYourTurn)
+        if (continueGame)
         {
-            //playerPanel.blocksRaycasts = true;
-            //opponentPanel.blocksRaycasts = false;
-            playerBackground.color = Color.green;
-            opponentBackground.color = Color.grey;
+            if (isYourTurn)
+            {
+                //playerPanel.blocksRaycasts = true;
+                //opponentPanel.blocksRaycasts = false;
+                playerBackground.color = Color.green;
+                opponentBackground.color = Color.grey;
+            }
+            else
+            {
+                //playerPanel.blocksRaycasts = false;
+                //opponentPanel.blocksRaycasts = true;
+                playerBackground.color = Color.grey;
+                opponentBackground.color = Color.green;  
+            }
         }
         else
         {
-            //playerPanel.blocksRaycasts = false;
-            //opponentPanel.blocksRaycasts = true;
-            playerBackground.color = Color.grey;
-            opponentBackground.color = Color.green;
+            Debug.Log("game ended");
+            gameOver.SetActive(true);
         }
 
     }

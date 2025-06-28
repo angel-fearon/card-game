@@ -9,21 +9,23 @@ public class DisplayCharacter : MonoBehaviour
     public Text health;
     public Image image;
     public CharacterCard c;
-
+    public GameObject parent;
     public int currentHealth;
-
+    private bool isAlive;
     public bool isFaceDown;
 
     //scripts
     public AttackScript attack;
+    public TurnSystem turnSystem;
 
     void Start()
     {
+        isAlive = true;
+        parent = transform.parent.gameObject;
         c = CardDatabase.characters[displayId];
         currentHealth = c.getHealth();
         
     }
-
     void Update()
     {
         cardBack.SetActive(isFaceDown);
@@ -38,13 +40,58 @@ public class DisplayCharacter : MonoBehaviour
     public void cardClicked()
     {
         //Debug.Log(c.getName() + " card selected ID: " + displayId);
-        GameObject parent = transform.parent.gameObject;
         attack.setCurrentCharacter(c,parent,this);
     }
 
     public void damageCharacter(int damage)
     {
-        currentHealth -= damage;
+        //deals damage
+        if (damage <= currentHealth)
+        {
+            currentHealth -= damage;
+        }
+        else if (damage > currentHealth)
+        {
+            currentHealth = 0;
+        }
+
+        if (currentHealth == 0)
+        {
+            isAlive = false;
+            if (checkAlliesAlive() == false)
+            {
+                TurnSystem.continueGame = false;
+            }
+            
+        }
+    }
+
+    public bool checkAlliesAlive()
+    {
+        bool alliesAlive = false;
+
+        //get other charaacters within panel
+        GameObject[] characters = new GameObject[3];
+        for (int i = 0; i < characters.Length; i++)
+        {
+            characters[i] = parent.transform.GetChild(i).gameObject;
+        }
+
+        //check if each character isAlive
+        for (int i = 0; i < characters.Length; i++)
+        {
+            if (characters[i].GetComponent<DisplayCharacter>().getIsAlive() == true)
+            {
+                alliesAlive = true;
+                break;
+            }
+        }
+        return alliesAlive;
+    }
+
+    public bool getIsAlive()
+    {
+        return isAlive;
     }
 
 }

@@ -7,7 +7,6 @@ public class AttackScript : MonoBehaviour
     public static CharacterCard attackCard;
     public static CharacterCard defenseCard;
     private bool isYourTurn;
-    public TurnSystem t;
 
     private List<string> buffs = new List<string>();
     void Start()
@@ -59,6 +58,7 @@ public class AttackScript : MonoBehaviour
             Debug.Log("No card assigned");
         }
     }
+    //deals damage to the defense card and ends the turn
     public void attack(DisplayCharacter d)
     {
         int damage = attackCard.abilities[0].getDamage();    
