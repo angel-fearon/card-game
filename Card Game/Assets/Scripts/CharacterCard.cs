@@ -34,4 +34,8 @@ public class CharacterCard
     {
         return sprite;
     }
+    public Ability[] getAbilities()
+    {
+        return abilities;
+    }
 }

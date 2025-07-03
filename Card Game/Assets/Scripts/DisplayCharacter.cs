@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class DisplayCharacter : MonoBehaviour
 {
     public GameObject cardBack;
+    public GameObject abilityPanel;
     public int displayId;
     public Text health;
     public Image image;
@@ -13,6 +14,7 @@ public class DisplayCharacter : MonoBehaviour
     public int currentHealth;
     private bool isAlive;
     public bool isFaceDown;
+    
 
     //scripts
     public AttackScript attack;
@@ -40,6 +42,7 @@ public class DisplayCharacter : MonoBehaviour
     public void cardClicked()
     {
         //Debug.Log(c.getName() + " card selected ID: " + displayId);
+        abilityPanel.SetActive(true);
         attack.setCurrentCharacter(c,parent,this);
     }
 

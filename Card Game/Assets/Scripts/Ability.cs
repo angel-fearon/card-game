@@ -2,20 +2,24 @@ using UnityEngine;
 
 public class Ability
 {
-    private string name;
-    private int damage;
-    private string description;
+    public string name;
+    public int baseDamage;
+    public Effect[] effects;
     //add name attribute
 
-    public Ability(string name, int damage, string description)
+    public Ability(string name, int baseDamage, Effect[] effects)
     {
         this.name = name;
-        this.damage = damage;
-        this.description = description;
+        this.baseDamage = baseDamage;
+        this.effects = effects;
     }
 
+    public string getName()
+    {
+        return name;
+    }
     public int getDamage()
     {
-        return damage;
+        return baseDamage;
     }
 }

@@ -14,11 +14,14 @@ public class CardDatabase : MonoBehaviour
         cards.Add(3, new Card(3, "Folding chair", 2, "Weapon", Resources.Load<Sprite>("folding chair")));
         cards.Add(4, new Card(4, "Jerk chicken", 2, "Chicken", Resources.Load<Sprite>("folding chair")));
 
-        Ability[] melAbilities = { new Ability("mel ability", 2, "low damage") };
+        Effect[] effects = { new Effect("heal", 1) };
+        Effect[] empty = { };
+        Ability[] melAbilities = { new Ability("1st ability", 2, empty), 
+                                   new Ability(" 2nd ability",3, effects )};
         characters.Add(1, new CharacterCard(1, "Mel Medarda", 10, Resources.Load<Sprite>("mel medarda"), melAbilities));
-        Ability[] desireeAbilities = { new Ability("desiree ability", 3, "medium damage") };
+        Ability[] desireeAbilities = { new Ability("desiree ability", 3, empty) };
         characters.Add(2, new CharacterCard(2, "Desiree", 10, Resources.Load<Sprite>("afro girl"),desireeAbilities));
-        Ability[] twinsAbilities = { new Ability("twins ability", 6, "high damage") };
+        Ability[] twinsAbilities = { new Ability("twins ability", 6, empty) };
         characters.Add(3, new CharacterCard(3, "Smoke Stack Twins", 10, Resources.Load<Sprite>("smoke stack twins"), twinsAbilities));
 
     }
