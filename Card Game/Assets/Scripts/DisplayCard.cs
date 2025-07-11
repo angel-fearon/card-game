@@ -52,7 +52,6 @@ public class DisplayCard : MonoBehaviour
     {
         Debug.Log(c.getName() + " card selected ID: " + displayId);
         GameObject parent = transform.parent.gameObject;
-        attack.setBuff(c/*, parent, this*/);
     }
     public void setDisplayId(int displayId)
     {

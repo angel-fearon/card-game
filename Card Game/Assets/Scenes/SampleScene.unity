@@ -1163,6 +1163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 909113641}
   - component: {fileID: 909113642}
+  - component: {fileID: 909113643}
   m_Layer: 0
   m_Name: Logic
   m_TagString: Untagged
@@ -1201,8 +1202,19 @@ MonoBehaviour:
   opponentPanel: {fileID: 1834580704}
   playerBackground: {fileID: 1778951978}
   opponentBackground: {fileID: 1834580702}
-  isActionPhase: 0
   gameOver: {fileID: 877390378}
+--- !u!114 &909113643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909113640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd20210fae536794094bab24eca07ce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &925951020
 PrefabInstance:
   m_ObjectHideFlags: 0

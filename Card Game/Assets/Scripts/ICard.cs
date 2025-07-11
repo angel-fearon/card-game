@@ -1,42 +1,51 @@
 using UnityEngine;
 namespace AbilityConstructor {
     /*Decorator design pattern has been used*/
-    public class AbilityResult
-    {
-        public int Damage { get; set; }
-        public int Healing { get; set; }
+    //public class AbilityResult
+    //{
+    //    public int Damage { get; set; }
+    //    public int Healing { get; set; }
 
-        //default value for params is 0 if not set
-        public AbilityResult(int damage = 0, int healing = 0)
-        {
-            Damage = damage;
-            Healing = healing;
-        }
+    //    //default value for params is 0 if not set
+    //    public AbilityResult(int damage = 0, int healing = 0)
+    //    {
+    //        Damage = damage;
+    //        Healing = healing;
+    //    }
 
-        public void Add(AbilityResult other)
-        {
-            Damage += other.Damage;
-            Healing += other.Healing;
-        }
-    }
+    //    public void Add(AbilityResult other)
+    //    {
+    //        Damage += other.Damage;
+    //        Healing += other.Healing;
+    //    }
+    //}
     //base component interface
     public interface IAbility
     {
-        public AbilityResult play();
+        public void play();
+        public Ability getAttackAbility();
     }
 
     //concrete component
     public class ConcreteAbility : IAbility
     {
-        readonly int damage;
-        
-        public ConcreteAbility(int damage)
+        readonly Ability attackAbility;//protected (instead of readonly) keyword may cause problems
+        readonly DisplayCharacter defenceCard;
+
+
+        public ConcreteAbility(Ability attackAbility, DisplayCharacter defenceCard)
         {
-            this.damage = damage;
+            this.attackAbility = attackAbility;
+            this.defenceCard = defenceCard;
         }
-        public AbilityResult play()
+        public void play()
         {
-            return new AbilityResult(damage: damage);
+            defenceCard.damage(attackAbility.baseDamage);
+        }
+
+        public Ability getAttackAbility()
+        {
+            return attackAbility;
         }
     }
 
@@ -50,27 +59,34 @@ namespace AbilityConstructor {
             this.wrappedAbility = ability;
         }
         
-        //by default the wrapped abilities play method is returned unless overriden
-        public virtual AbilityResult play()
+        //by default the wrapped abilities play method is called unless overriden
+        public virtual void play()
         {
-            return wrappedAbility.play();
+           wrappedAbility.play();
+        }
+
+        public Ability getAttackAbility()
+        {
+            return wrappedAbility.getAttackAbility();
         }
     }
 
     //concrete decorator(s) use heal as template
     public class HealDecorator : AbilityDecorator
     {
-        private readonly int healAmount;
-        //constructs HealDecorator by calling the superclass constructor
+        private readonly int heal;
+        private readonly DisplayCard parentCard;
+        //constructs HealDecorator by calling the superclass constructor using the abillity passed in (may be a concrete ability or even wrapped)
         public HealDecorator(IAbility ability,int heal) : base(ability)
         {
-            this.healAmount = heal;
+            this.heal = heal;
+            //this.parentCard = ability.transform.parent.GetComponent<DisplayCard>();
         }
-        public override AbilityResult play()
+        public override void play()
         {
-            var result = base.play();
-            result.Healing += healAmount;
-            return result;
+            Ability attack = wrappedAbility.getAttackAbility();
+            
+            //base.play();
         }
     }
 }

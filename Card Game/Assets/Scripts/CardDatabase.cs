@@ -19,9 +19,11 @@ public class CardDatabase : MonoBehaviour
         Ability[] melAbilities = { new Ability("1st ability", 2, empty), 
                                    new Ability(" 2nd ability",3, effects )};
         characters.Add(1, new CharacterCard(1, "Mel Medarda", 10, Resources.Load<Sprite>("mel medarda"), melAbilities));
-        Ability[] desireeAbilities = { new Ability("desiree ability", 3, empty) };
+        Ability[] desireeAbilities = { new Ability("desiree ability", 3, empty),
+                                   new Ability(" 2nd ability",3, effects ) };
         characters.Add(2, new CharacterCard(2, "Desiree", 10, Resources.Load<Sprite>("afro girl"),desireeAbilities));
-        Ability[] twinsAbilities = { new Ability("twins ability", 6, empty) };
+        Ability[] twinsAbilities = { new Ability("twins ability", 6, empty),
+                                   new Ability(" 2nd ability",3, effects ) };
         characters.Add(3, new CharacterCard(3, "Smoke Stack Twins", 10, Resources.Load<Sprite>("smoke stack twins"), twinsAbilities));
 
     }

@@ -1,27 +1,42 @@
 using System.Collections.Generic;
+using AbilityConstructor;
 using UnityEngine;
 
 public class AttackScript : MonoBehaviour
 {
-    private static CharacterCard currentCharacter;//might need to make public?
-    public static CharacterCard attackCard;
-    public static CharacterCard defenseCard;
-    private bool isYourTurn;
+    public static DisplayCharacter attackCard;
+    public static DisplayCharacter defenseCard;
+    public static Ability attackAbility;
+
+    public static AttackScript Instance { get; private set; }
+
+    //ensures AttackScript is a singleton
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);//optional clause
+        }
+    }
 
     //assigns an attack or defence card with checks that the card selected corresponds to the player whose turn it is
-    public void setCurrentCharacter(CharacterCard c,GameObject parent, DisplayCharacter d)
+    public void setCurrentCharacter(DisplayCharacter d)
     {
-        isYourTurn = TurnSystem.isYourTurn;
-        currentCharacter = c;
+        bool isYourTurn = TurnSystem.isYourTurn;
+        GameObject parent = d.transform.parent.gameObject;
         if (attackCard == null)
         {
             if (isYourTurn == true && parent.name == "PlayerCharacters")
             {
-                attackCard = currentCharacter;
+                attackCard = d;
                 Debug.Log("Attack card assigned as " + attackCard.name);
             }else if(isYourTurn == false && parent.name == "OpponentCharacters")
             {
-                attackCard = currentCharacter;
+                attackCard = d;
                 Debug.Log("Attack card assigned as " + attackCard.name);
             }       
         }
@@ -29,13 +44,13 @@ public class AttackScript : MonoBehaviour
         {
             if (isYourTurn == true && parent.name == "OpponentCharacters")
             {
-                defenseCard = currentCharacter;
+                defenseCard = d;
                 Debug.Log("defense card assigned as " + defenseCard.name);
                 attack(d);
             }
             else if (isYourTurn == false && parent.name == "PlayerCharacters")
             {
-                defenseCard = currentCharacter;
+                defenseCard = d;
                 Debug.Log("defense card assigned as " + defenseCard.name);
                 attack(d);
             }
@@ -48,16 +63,13 @@ public class AttackScript : MonoBehaviour
     //deals damage to the defense card and ends the turn
     public void attack(DisplayCharacter d)
     {
-        int damage = attackCard.getAbilities()[0].getDamage();    
-        d.damageCharacter(damage);
-        Debug.Log(damage + " damage dealt");
+        var ability = AbilityFactory.createAbility(attackAbility, d);
+        //int damage = attackCard.character.getAbilities()[0].getDamage();    
+        //d.damage(damage);
+        //Debug.Log(damage + " damage dealt");
         TurnSystem.Instance.switchActivePlayer();
         attackCard = null;
         defenseCard = null;
-    }
-    public void setBuff(Card c)
-    {
-
     }
 }
 

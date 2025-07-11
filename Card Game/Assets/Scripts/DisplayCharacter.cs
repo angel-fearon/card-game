@@ -9,7 +9,7 @@ public class DisplayCharacter : MonoBehaviour
     public int displayId;
     public Text health;
     public Image image;
-    public CharacterCard c;
+    public CharacterCard character;
     public GameObject parent;
     public int currentHealth;
     private bool isAlive;
@@ -17,15 +17,14 @@ public class DisplayCharacter : MonoBehaviour
     
 
     //scripts
-    public AttackScript attack;
     public TurnSystem turnSystem;
 
     void Start()
     {
         isAlive = true;
         parent = transform.parent.gameObject;
-        c = CardDatabase.characters[displayId];
-        currentHealth = c.getHealth();
+        character = CardDatabase.characters[displayId];
+        currentHealth = character.getHealth();
         
     }
     void Update()
@@ -35,18 +34,22 @@ public class DisplayCharacter : MonoBehaviour
     }
     public void show()
     {
-        //name.text = c.getName();
+        //name.text = character.getName();
         health.text = currentHealth.ToString();
-        image.sprite = c.getSprite();
+        image.sprite = character.getSprite();
     }
     public void cardClicked()
     {
-        //Debug.Log(c.getName() + " card selected ID: " + displayId);
+        //Debug.Log(character.getName() + " card selected ID: " + displayId);
+        if (TurnSystem.isYourTurn == true && parent.name == "OpponentCharacters" || TurnSystem.isYourTurn == false && parent.name == "PlayerCharacters")
+        {
+            abilityPanel.SetActive(true);
+        }
         abilityPanel.SetActive(true);
-        attack.setCurrentCharacter(c,parent,this);
+        //AttackScript.setCurrentCharacter(c,parent,this);
     }
 
-    public void damageCharacter(int damage)
+    public void damage(int damage)
     {
         //deals damage
         if (damage <= currentHealth)
@@ -96,5 +99,6 @@ public class DisplayCharacter : MonoBehaviour
     {
         return isAlive;
     }
+
 
 }

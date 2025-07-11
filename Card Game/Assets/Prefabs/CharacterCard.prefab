@@ -87,7 +87,6 @@ GameObject:
   - component: {fileID: 4638015378771055491}
   - component: {fileID: 1973355926570555479}
   - component: {fileID: 2739461431435256928}
-  - component: {fileID: 8576257531088157314}
   - component: {fileID: 7910725820319201411}
   m_Layer: 5
   m_Name: CharacterCard
@@ -177,20 +176,7 @@ MonoBehaviour:
   parent: {fileID: 0}
   currentHealth: 0
   isFaceDown: 0
-  attack: {fileID: 8576257531088157314}
   turnSystem: {fileID: 0}
---- !u!114 &8576257531088157314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562550309321587829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd20210fae536794094bab24eca07ce0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7910725820319201411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -417,7 +403,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 770581122302005432}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4767686571535855143}
+        m_TargetAssemblyTypeName: DisplayAbility, Assembly-CSharp
+        m_MethodName: onClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4767686571535855143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,7 +704,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 192094804597603788}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5721148069314925396}
+        m_TargetAssemblyTypeName: DisplayAbility, Assembly-CSharp
+        m_MethodName: onClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5721148069314925396
 MonoBehaviour:
   m_ObjectHideFlags: 0

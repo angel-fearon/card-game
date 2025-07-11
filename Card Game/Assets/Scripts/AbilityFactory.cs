@@ -4,9 +4,9 @@ using UnityEngine.Assertions.Must;
 
 public class AbilityFactory
 {
-    public static IAbility createAbility(Ability a)
+    public static IAbility createAbility(Ability a, DisplayCharacter defenseCard)
     {
-        IAbility ability = new ConcreteAbility(a.baseDamage);
+        IAbility ability = new ConcreteAbility(a, defenseCard);
 
         foreach (var e in a.effects)
         {

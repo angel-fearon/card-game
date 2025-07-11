@@ -10,6 +10,7 @@ public class DisplayAbility : MonoBehaviour
     public Ability a;
     public CharacterCard c;
     public DisplayCharacter parentScript;
+
     void Start()
     {
         parentScript = transform.parent.GetComponentInParent<DisplayCharacter>();
@@ -26,7 +27,10 @@ public class DisplayAbility : MonoBehaviour
     public void onClick()
     {
         Debug.Log(a.getName() + "selected");
-        var ability = AbilityFactory.createAbility(a);
+        AttackScript.attackAbility = a;
+
+        //var ability = AbilityFactory.createAbility(a);
+
     }
 
 
