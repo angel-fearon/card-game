@@ -64,12 +64,15 @@ public class AttackScript : MonoBehaviour
     public void attack(DisplayCharacter d)
     {
         var ability = AbilityFactory.createAbility(attackAbility, d);
+        ability.play();
         //int damage = attackCard.character.getAbilities()[0].getDamage();    
         //d.damage(damage);
         //Debug.Log(damage + " damage dealt");
         TurnSystem.Instance.switchActivePlayer();
+        attackCard.abilityPanel.SetActive(false);
         attackCard = null;
         defenseCard = null;
+
     }
 }
 

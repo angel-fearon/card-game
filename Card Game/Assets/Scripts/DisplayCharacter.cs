@@ -21,6 +21,7 @@ public class DisplayCharacter : MonoBehaviour
 
     void Start()
     {
+        abilityPanel.SetActive(false);
         isAlive = true;
         parent = transform.parent.gameObject;
         character = CardDatabase.characters[displayId];
@@ -41,12 +42,11 @@ public class DisplayCharacter : MonoBehaviour
     public void cardClicked()
     {
         //Debug.Log(character.getName() + " card selected ID: " + displayId);
-        if (TurnSystem.isYourTurn == true && parent.name == "OpponentCharacters" || TurnSystem.isYourTurn == false && parent.name == "PlayerCharacters")
+        if (TurnSystem.isYourTurn == true && parent.name == "PlayerCharacters" || TurnSystem.isYourTurn == false && parent.name == "OpponentCharacters")
         {
             abilityPanel.SetActive(true);
         }
-        abilityPanel.SetActive(true);
-        //AttackScript.setCurrentCharacter(c,parent,this);
+        AttackScript.Instance.setCurrentCharacter(this);
     }
 
     public void damage(int damage)

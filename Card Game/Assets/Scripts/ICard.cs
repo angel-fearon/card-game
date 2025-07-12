@@ -1,29 +1,9 @@
 using UnityEngine;
 namespace AbilityConstructor {
     /*Decorator design pattern has been used*/
-    //public class AbilityResult
-    //{
-    //    public int Damage { get; set; }
-    //    public int Healing { get; set; }
-
-    //    //default value for params is 0 if not set
-    //    public AbilityResult(int damage = 0, int healing = 0)
-    //    {
-    //        Damage = damage;
-    //        Healing = healing;
-    //    }
-
-    //    public void Add(AbilityResult other)
-    //    {
-    //        Damage += other.Damage;
-    //        Healing += other.Healing;
-    //    }
-    //}
-    //base component interface
     public interface IAbility
     {
         public void play();
-        public Ability getAttackAbility();
     }
 
     //concrete component
@@ -41,12 +21,9 @@ namespace AbilityConstructor {
         public void play()
         {
             defenceCard.damage(attackAbility.baseDamage);
+            Debug.Log(attackAbility.baseDamage + "damage dealt");
         }
 
-        public Ability getAttackAbility()
-        {
-            return attackAbility;
-        }
     }
 
     //abstract decorator
@@ -65,28 +42,22 @@ namespace AbilityConstructor {
            wrappedAbility.play();
         }
 
-        public Ability getAttackAbility()
-        {
-            return wrappedAbility.getAttackAbility();
-        }
     }
 
     //concrete decorator(s) use heal as template
     public class HealDecorator : AbilityDecorator
     {
         private readonly int heal;
-        private readonly DisplayCard parentCard;
         //constructs HealDecorator by calling the superclass constructor using the abillity passed in (may be a concrete ability or even wrapped)
         public HealDecorator(IAbility ability,int heal) : base(ability)
         {
             this.heal = heal;
-            //this.parentCard = ability.transform.parent.GetComponent<DisplayCard>();
         }
         public override void play()
         {
-            Ability attack = wrappedAbility.getAttackAbility();
-            
-            //base.play();
+            base.play();
+            AttackScript.attackCard.damage(heal*-1);
+            Debug.Log(AttackScript.attackCard + "healed for " + heal);
         }
     }
 }
