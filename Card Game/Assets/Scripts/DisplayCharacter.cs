@@ -10,7 +10,7 @@ public class DisplayCharacter : MonoBehaviour
     public Text health;
     public Image image;
     public CharacterCard character;
-    public GameObject parent;
+    private GameObject parent;
     public int currentHealth;
     private bool isAlive;
     public bool isFaceDown;
@@ -66,7 +66,7 @@ public class DisplayCharacter : MonoBehaviour
             isAlive = false;
             if (checkAlliesAlive() == false)
             {
-                TurnSystem.continueGame = false;
+                TurnSystem.currentPhase = GamePhase.GameOver;
             }
             
         }
@@ -76,7 +76,7 @@ public class DisplayCharacter : MonoBehaviour
     {
         bool alliesAlive = false;
 
-        //get other charaacters within panel
+        //get other chararacters within panel
         GameObject[] characters = new GameObject[3];
         for (int i = 0; i < characters.Length; i++)
         {
