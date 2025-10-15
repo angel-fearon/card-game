@@ -26,12 +26,14 @@ public class DisplayCharacter : MonoBehaviour
         parent = transform.parent.gameObject;
         character = CardDatabase.characters[displayId];
         currentHealth = character.getHealth();
-        
+        show();
+
     }
     void Update()
     {
         cardBack.SetActive(isFaceDown);
         show();
+        Debug.Log("card " + displayId + " displayed");
     }
     public void show()
     {
@@ -70,6 +72,7 @@ public class DisplayCharacter : MonoBehaviour
             }
             
         }
+        show();
     }
 
     public bool checkAlliesAlive()

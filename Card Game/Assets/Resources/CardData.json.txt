@@ -1,0 +1,26 @@
+{
+	"CharacterCard": [
+		{
+			"id": 1,
+			"name": "Mel Medarda",
+			"health": 10,
+			"abilities": ["Projectile", "Burst"],
+			"sprite": "mel medarda"
+		},
+		{
+			"id": 2,
+			"name": "Desiree",
+			"health": 10,
+			"abilities": ["Projectile", "Burst"],
+			"sprite": "mel medarda"
+		},
+		{
+			"id": 3,
+			"name": "Smoke Stack Twins",
+			"health": 10,
+			"abilities": ["Punch", "Burst"],
+			"sprite": "mel medarda"
+		},
+	
+	]
+}
