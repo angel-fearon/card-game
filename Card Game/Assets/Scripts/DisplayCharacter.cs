@@ -18,13 +18,15 @@ public class DisplayCharacter : MonoBehaviour
 
     //scripts
     public TurnSystem turnSystem;
+    public FileManager fileManager;
 
     void Start()
     {
         abilityPanel.SetActive(false);
         isAlive = true;
         parent = transform.parent.gameObject;
-        character = CardDatabase.characters[displayId];
+        //character = CardDatabase.characters[displayId];
+        character = FileManager.characterList.getCharacter(displayId-1);//index of list is 1 less than id
         currentHealth = character.getHealth();
         show();
 
@@ -39,7 +41,7 @@ public class DisplayCharacter : MonoBehaviour
     {
         //name.text = character.getName();
         health.text = currentHealth.ToString();
-        image.sprite = character.getSprite();
+        image.sprite = Resources.Load<Sprite>(character.getSprite());
     }
     public void cardClicked()
     {
